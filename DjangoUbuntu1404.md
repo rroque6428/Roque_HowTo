@@ -22,32 +22,14 @@ $ . venv/bin/activate
 ```shell
 $ export PROMPT_DIRTRIM=1  # Short version of dir path
 ```
-### Passo: 
+### Passo: Criação do Projeto
+```shell
+(venv) $ django-admin startproject proj01
+```
 
-### Extras
-Se 
-*** WINDOWS
-// Download Python 3.7 from https://www.python.org/downloads/windows
-Setting up Virtual Env
-$ python -m venv c/Roque/lab/Django/PythonREST/Django01/
-Activate Virtual Env
-$ . Scripts/activate
-// Upgrade PIP
-$ pip install --upgrade pip
-// Install Django
-$ pip install django
-$ pip install djangorestframework
-$ pip install django-filter
-Download SQLite from https://www.sqlite.org/download.html
-Download SQLiteBrowser from https://sqlitebrowser.org/dl/
-// To test app
-$ pip install --user --upgrade httpie
-$ pip install ipython
-https://www.getpostman.com/downloads/
-
-## What Python version can I use with Django?
-Release Django     |Versão do Python                                       
-:---------:|---------------------------------------------
+## Qual versão do Python usar?
+Release Django |Versão do Python                                       
+:-------------:|---------------------------------------------
 1.11.20    |2.7, 3.4, 3.5, 3.6, 3.7 (added in 1.11.17)   
 2.0.13	   |3.4, 3.5, 3.6, 3.7                           
 2.1, 2.2   |3.5, 3.6, 3.7                                
