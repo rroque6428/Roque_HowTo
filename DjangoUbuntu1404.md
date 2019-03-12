@@ -22,6 +22,8 @@ $ . venv/bin/activate
 ```shell
 $ export PROMPT_DIRTRIM=1  # Short version of dir path
 ```
+### Passo: 
+
 ### Extras
 Se 
 *** WINDOWS
