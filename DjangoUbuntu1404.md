@@ -1,7 +1,24 @@
 # Django 2.x 
 ## Roteiro de Instalação no Linux Ubuntu 14.04
-O roteiro abaixo visa dar passo-a-passo o que é necessário para criação de uma aplicação utilizando o Django framework.
-
+O roteiro abaixo visa dar passo-a-passo o que é necessário para criação e deploy de uma aplicação utilizando o Django framework.
+1. [Criação do Diretório de Trabalho](#step_workdir)
+1. [Criação do Ambiente Virtual (VirtualEnv)](#step_virtualenv)
+1. [Criação e Teste Inicial do Projeto](#step_createproj)
+1. [Django Debug Toolbar](#step_debugtoolbar)
+1. [Preparação para Deploy](#step_deployfiles)
+    * Inicializando o Git
+    * Protegendo informações sensíveis
+    * Configuração do Banco de Dados
+    * Lidando com Arquivos estáticos
+    * Arquivos de requirementos
+___
+* [Qual versão do Django usar?](#python_version)
+* [Pacotes úteis](#otherpkgs)
+* [Referências](#references)
+* [Documentação](#docs)
+* [Outros](#usefullinks)
+___
+<a name="step_workdir"></a>
 ### Passo: Criação do Diretório de Trabalho
 Crie uma pasta que receberá o Ambiente Virtual e o projeto propriamente dito.
 ```shell
@@ -22,6 +39,7 @@ $ . venv/bin/activate
 ```shell
 $ export PROMPT_DIRTRIM=1  # Short version of dir path
 ```
+<a name="step_createproj"></a>
 ### Passo: Criação e Teste Inicial do Projeto
 ```shell
 (venv) $ django-admin startproject proj01
@@ -31,13 +49,14 @@ $ export PROMPT_DIRTRIM=1  # Short version of dir path
 (venv) $ python manage.py createsuperuser
 (venv) $ python manage.py runserver 0.0.0.0:9000
 ```
-
+<a name="step_debugtoolbar"></a>
 ### Passo: Django Debug Toolbar
 ```shell
 (venv) $ pip install django-debug-toolbar
 ```
 Fazer as modificações em 'settings.py' segundo o [Manual de Instalação][DjDebugToolbarInstall].
 
+<a name="step_deployfiles"></a>
 ### Passo: Preparação para Deploy
 #### Inicializando o Git
 Criar o arquivo '.gitignore' com no mínimo as linhas abaixo.
@@ -54,7 +73,7 @@ Depois inicializar o diretório com o Git, caso ainda não tenha sido feito.
 (venv) $ git add .
 (venv) $ git commit -m "First deploy"
 ```
-#### Protegendo informações sensíveis.
+#### Protegendo informações sensíveis
 ```shell
 (venv) $ pip install python-decouple
 ```
@@ -99,7 +118,7 @@ Atualizar 'settings.py'.
 ...
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 ```
-### Arquivos de Requirements
+### Arquivos de requirementos
 ```shell
 (venv) $ pip freeze > requirements-dev.txt
 ```
@@ -118,16 +137,16 @@ Criar o arquivo 'runtime.txt' com a linha:
 python-3.6.0
 ```
 Para [Deploy no Heroku][DeployHeroku] acompanhar os passos restantes a partir da
-seção 'Creating the app at Heroku'.
+seção **Creating the app at Heroku**.
 
-## Qual versão do Django usar?
+## Qual versão do Django usar? <a name="python_version"></a>
 Release Django |Versão do Python                                       
 :-------------:|---------------------------------------------
 1.11.20    |2.7, 3.4, 3.5, 3.6, 3.7 (added in 1.11.17)   
 2.0.13	   |3.4, 3.5, 3.6, 3.7                           
 2.1, 2.2   |3.5, 3.6, 3.7                                
 
-## Pacotes úteis
+## Pacotes úteis <a name="otherpkgs"></a>
 Não esqueça de ativar a [VirtualEnv](#step_virtualenv).
 
 ### [Pillow][Pillow]
@@ -140,7 +159,7 @@ Não esqueça de ativar a [VirtualEnv](#step_virtualenv).
 (venv) $ pip install django-filter
 ```
 
-## Referências
+## Referências <a name="references"></a>
 
 - [Django][Django]
 - [Django REST Framework][DjangoREST]  
@@ -152,15 +171,15 @@ Não esqueça de ativar a [VirtualEnv](#step_virtualenv).
 - [StackEdit][StackEdit] | Online Markdown Editor 
 - [Markdown Cheatsheet][MDCheatSheet]
 
-### Documentação
+### Documentação <a name="docs"></a>
 
 - [Class-based Views][ClassBasedViews]
 - [Bootstrap 4.3][BootstrapDocs]
 
-### Outros
+### Outros <a name="usefullinks"></a>
 
 - [Changing Django's Project Name][ChangeProjectName]
-- [Script para deploy no Heroku][DeployHeroku]
+- [Script completo para deploy no Heroku][DeployHeroku]
 
 [Django]: https://www.djangoproject.com "Official Website"
 [DjangoREST]: https://www.django-rest-framework.org "Official Website"
