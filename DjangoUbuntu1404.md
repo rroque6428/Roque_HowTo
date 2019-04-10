@@ -1,6 +1,7 @@
 # Django 2.x 
 ## Roteiro de Instalação no Linux Ubuntu 14.04
-O roteiro abaixo visa dar passo-a-passo o que é necessário para criação e deploy de uma aplicação utilizando o Django framework.
+O roteiro abaixo visa dar passo-a-passo o que é necessário para criação e 
+deploy de uma aplicação utilizando o Django framework.
 1. [Criação do Diretório de Trabalho](#step_workdir)
 1. [Criação do Ambiente Virtual (VirtualEnv)](#step_virtualenv)
 1. [Criação e Teste Inicial do Projeto](#step_createproj)
@@ -102,7 +103,7 @@ default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 DATABASES = { 'default': config('DATABASE_URL', default=default_dburl, cast=dburl), }
 ...
 ```
-### Lidando com Arquivos estáticos (static files)
+### Lidando com Arquivos Estáticos (static files)
 ```shell
 (venv) $ pip install dj-static
 ```
@@ -134,19 +135,62 @@ web: gunicorn proj01.wsgi --log-file -
 ```
 Criar o arquivo 'runtime.txt' com a linha:
 ```shell
-python-3.6.0
+python-3.6.8
 ```
 Para [Deploy no Heroku][DeployHeroku] acompanhar os passos restantes a partir da
-seção **Creating the app at Heroku**.
+seção **Creating the app at Heroku**. Mas segue um resumo dos comandos.
 
-## Qual versão do Django usar? <a name="python_version"></a>
+Se o Heroku CLI não estiver instalado:
+```shell
+(venv) $ curl https://cli-assets.heroku.com/install.sh | sh  # Heroku CLI
+```
+Após a instalação:
+```shell
+(venv) $ heroku --version
+(venv) $ heroku login -i
+(venv) $ # Crie o projeto no Heroku. Anote o resultado!
+(venv) $ heroku apps:create roque-proj01  
+Creating ⬢ roque-proj01... done
+https://roque-proj01.herokuapp.com/ | https://git.heroku.com/roque-proj01.git
+```
+Atualize 'settings.py' com o resultado do último comando.
+```shell
+...
+ALLOWED_HOSTS = ['roque-proj01.herokuapp.com']
+...
+```
+A seguir:
+```shell 
+(venv) $ heroku plugins:install heroku-config  # instala o plugin 'config'
+(venv) $ heroku config:push  # transfere as configurações
+(venv) $ heroku config  # checa a transferência
+(venv) # git status 
+(venv) $ git add .  
+(venv) $ git commit -m "Configuring the app"  # deixe tudo atualizado!
+(venv) $ git push heroku master --force  # checar se ocorrey tudo OK... 
+(venv) $ heroku run python manage.py migrate  # ... então rodar as migrações
+(venv) $ heroku run python manage.py createsuperuser
+```
+A partir deste ponto a aplicação já deverá estar rodando naquele endereço. Alguns 
+comandos úteis após a instalação.
+```shell
+(venv) $ git push heroku master  # para atualizar...
+(venv) $ heroku run python manage.py migrate  # ... bom rodar o migrate também 
+(venv) $ heroku logs --tail  # para ver os logs
+(venv) $ heroku config:set DEBUG=True  # ativar DEBUG
+(venv) $ heroku run bash  # sessão bash no servidor
+```
+
+<a name="python_version"></a>
+## Qual versão do Django usar? 
 Release Django |Versão do Python                                       
 :-------------:|---------------------------------------------
 1.11.20    |2.7, 3.4, 3.5, 3.6, 3.7 (added in 1.11.17)   
 2.0.13	   |3.4, 3.5, 3.6, 3.7                           
 2.1, 2.2   |3.5, 3.6, 3.7                                
 
-## Pacotes úteis <a name="otherpkgs"></a>
+<a name="otherpkgs"></a>
+## Pacotes úteis 
 Não esqueça de ativar a [VirtualEnv](#step_virtualenv).
 
 ### [Pillow][Pillow]
@@ -159,11 +203,13 @@ Não esqueça de ativar a [VirtualEnv](#step_virtualenv).
 (venv) $ pip install django-filter
 ```
 
-## Referências <a name="references"></a>
-
+<a name="references"></a>
+## Referências 
 - [Django][Django]
 - [Django REST Framework][DjangoREST]  
 - [Django Debug Toolbar][DJangoDebugToolbar]
+- [Django AllAuth][DjangoAllAuth] | Authentication system with social accounts
+- [Django HtmlMin][DjangoHtmlMin] | HTML minifier for Python
 - [Django Releases][DjDocReleases]
 - [PyCharm][PyCharm] | IDE Python
 - [HTTPie][HTTPie] | Command line HTTP client
@@ -171,13 +217,13 @@ Não esqueça de ativar a [VirtualEnv](#step_virtualenv).
 - [StackEdit][StackEdit] | Online Markdown Editor 
 - [Markdown Cheatsheet][MDCheatSheet]
 
-### Documentação <a name="docs"></a>
-
+<a name="docs"></a>
+### Documentação 
 - [Class-based Views][ClassBasedViews]
 - [Bootstrap 4.3][BootstrapDocs]
 
-### Outros <a name="usefullinks"></a>
-
+<a name="usefullinks"></a>
+### Outros 
 - [Changing Django's Project Name][ChangeProjectName]
 - [Script completo para deploy no Heroku][DeployHeroku]
 
@@ -185,6 +231,8 @@ Não esqueça de ativar a [VirtualEnv](#step_virtualenv).
 [DjangoREST]: https://www.django-rest-framework.org "Official Website"
 [DjDocReleases]: https://docs.djangoproject.com/pt-br/2.1/releases "Django Docs"
 [DjangoDebugToolbar]: https://django-debug-toolbar.readthedocs.io "Official"
+[DjangoAllAuth]: https://django-allauth.readthedocs.io "Official Website"
+[DjangoHtmlMin]: https://pypi.org/project/django-htmlmin "Official Website"
 [DjDebugToolbarInstall]: https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
 [Postman]: https://www.getpostman.com "Official Website"
 [HTTPie]: https://httpie.org "Official Website"
